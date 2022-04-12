@@ -1,5 +1,5 @@
 function maxSubArray(nums){
-    let res = nums[0], sum = 0, len = nums.length
+    let res = nums[0], sum = nums[0], len = nums.length
     for(let i = 1; i < len; i++){
         let cur = nums[i]
         if(sum > 0){
