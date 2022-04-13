@@ -1,19 +1,23 @@
 // 3 无重复最长子串
 function longStr(s) {
-    if (s === '') return 0
-    let ret = s[0], max = 1;
-    for (let i = 1, len = s.length; i < len; i++) {
-        let cur = s[i]
-        if (!ret.includes(cur)) {
-            ret = ret + cur
-        } else {
-            max = Math.max(max, ret.length)
-            ret = cur
+    let i = 0, j = 0, max = 0, len = s.length, set = new Set()
+    for (; j < len; j++) {
+        let val = s[j]
+        if (set.has(val)) {
+            max = Math.max(max, j - i)
+            while (set.has(val)) {
+                set.delete(s[i++])
+            }
         }
+        set.add(val)
     }
-    return max
+    return Math.max(max, j - i)
 }
 s = 'abcabcbb'
 console.log(longStr(s))
-s = ''
+s = 'asjrgapa'
+console.log(longStr(s))
+s = "tmmzuxt"
+console.log(longStr(s))
+s = "pwwkew"
 console.log(longStr(s))
