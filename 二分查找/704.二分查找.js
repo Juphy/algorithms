@@ -21,17 +21,17 @@
 
 
 function fn(nums, target){
-    if(nums.length === 0) return -1
-    let left = 0, right = nums - 1
+    if(nums.length === 0) return -1    
+    let left = 0, right = nums.length - 1
     while(left <= right){
-        const midInex = Math.floor((left + right) /2)
-        const midValue = nums[midInex]
-        if(midValue === target){
-            return midInex
+        let midIndex = Math.floor((left + right) / 2)
+        let midValue = nums[midIndex]
+        if(target < midValue){
+            right = midIndex-1
         }else if(target > midValue){
-            left = mid + 1
+            left = midIndex+1
         }else{
-            right = mid - 1
+            return midIndex
         }
     }
     return -1
