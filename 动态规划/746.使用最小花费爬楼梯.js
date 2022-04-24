@@ -41,3 +41,18 @@ function minCostClimbingStairs(cost){
     }
     return Math.min(cost[len - 1], cost[len - 2])
 }
+//  f[i]表示爬到第i层的最小花费
+// 由于每次只能爬 1 个或者 2 个台阶，所以 f[i] 这个状态只能从 f[i-1] 或者 f[i-2] 转移过来：
+//    1）如果从 i-1 爬上来，需要的花费就是 f[i-1] + cost[i-1]
+//    2）如果从 i-2 爬上来，需要的花费就是 f[i-2] + cost[i-2]
+//    没有其他情况了，而我们要 求的是最小花费，所以 f[i] 就应该是这两者的小者，得出状态转移方程：
+//               f[i] = min(f[i-1]+cost[i-1], f[i-2]+cost[i-2])
+//    然后考虑一下初始情况 f[0] 和 f[1]，根据题目要求它们都应该是 0。
+function minCostClimbingStairs(cost){
+    let len = cost.length
+    let arr = [0, 0]
+    for(let i = 2; i <= len; i++){
+        arr[i] = Math.min(arr[i-1]+cost[i-1], arr[i-2]+cost[i-2])
+    }
+    return arr[len]
+}
