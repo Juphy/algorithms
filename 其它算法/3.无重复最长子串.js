@@ -21,3 +21,19 @@ s = "tmmzuxt"
 console.log(longStr(s))
 s = "pwwkew"
 console.log(longStr(s))
+
+function longStr(s){
+    let res = '', max = 0, len = s.length
+    for(let i = 0; i < len; i++){
+        let str = s[i]
+        let index = res.indexOf(str)
+        if(index === -1){
+            res += str
+        }else{
+            max = Math.max(max, res.length)
+            res = res.slice(index+1) + str
+        }
+    }
+    return Math.max(res.length, max)
+}
+console.log(longStr(' '))
