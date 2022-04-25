@@ -29,24 +29,59 @@ const TreeNode = require("../utils/TreeNode")
 //   3
 // 4   5
 //1 3    1
+// 记忆化递归
 var rob = function (root) {
-    let result = []
-    function f(root, n){
-        if(!root) return
-        if(result[n]){
-            result[n] = root.val
-        }else{
-            result[n].push(root.val)
-        }
+  let map = new Map()
+  function fn(root) {
+    if (root == null) return 0
+    if (map.has(root)) return map.get(root)
+    let res1 = root.val
+    if (root.left) {
+      res1 += fn(root.left.left) + fn(root.left.right)
     }
-    f(root, 0)
-    let max1 = 0, max2 = 0
-    for(let i = 0; i < result.length; i++){
-        if(i%2===0){
-            max1 += result[n].reduce((a, b)=> a+b, 0)
-        }else{
-            max2 += result[n].reduce((a, b)=> a+b, 0)
-        }
+    if (root.right) {
+      res1 += fn(root.right.left) + fn(root.right.right)
     }
-    return Math.max(max1, max2)
+    let res2 = fn(root.left) + fn(root.right)
+    let res = Math.max(res1, res2)
+    map.set(root, res)
+    return res
+  }
+  return fn(root)
 }
+// [0, 1] 0,1分别表示打劫和不打劫根节点的最大收益
+function rob(root) {
+  let dp = new Map()
+  function fn(root) {
+    if (root == null) return [0, 0]
+    let left = fn(root.left),
+      right = fn(root.right)
+    if(!dp.has(root)){
+        dp.set(root, [0, 0])
+    }
+    let res = dp.get(root)
+    // 不打劫根节点
+    res[0] = Math.max(left[0], left[1]) + Math.max(right[0], right[1])
+    // 打劫根节点
+    res[1] = root.val + left[0] + right[0]
+    return res  
+  }
+  let res = fn(root)
+  return Math.max(res[0], res[1])
+}
+
+function rob(root) {
+    let dp = new Map()
+    function fn(root) {
+      if (root == null) return [0, 0]
+      let left = fn(root.left),
+        right = fn(root.right)
+      // 不打劫根节点
+      res1 = Math.max(left[0], left[1]) + Math.max(right[0], right[1])
+      // 打劫根节点
+      res2 = root.val + left[0] + right[0]
+      return [res1, res2]
+    }
+    let res = fn(root)
+    return Math.max(res[0], res[1])
+  }
