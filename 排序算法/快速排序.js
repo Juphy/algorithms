@@ -1,4 +1,3 @@
-let nums = [8, 7, 6, 2, 1, 5, 4, 10, 9, 3]
 function quickSort(arr){
     let len = arr.length
     if(len < 2) return arr
@@ -17,5 +16,10 @@ function quickSort(arr){
     }
     return quickSort(left).concat(arr[midInex], quickSort(right))
 }
-
+let nums = []
+for(let i = 100000; i >= 0; i--){
+    nums.push(i)
+}
+console.time('start')
 console.log(quickSort(nums))
+console.timeEnd('start')
