@@ -56,32 +56,32 @@ function rob(root) {
     if (root == null) return [0, 0]
     let left = fn(root.left),
       right = fn(root.right)
-    if(!dp.has(root)){
-        dp.set(root, [0, 0])
+    if (!dp.has(root)) {
+      dp.set(root, [0, 0])
     }
     let res = dp.get(root)
     // 不打劫根节点
     res[0] = Math.max(left[0], left[1]) + Math.max(right[0], right[1])
     // 打劫根节点
     res[1] = root.val + left[0] + right[0]
-    return res  
+    return res
   }
   let res = fn(root)
   return Math.max(res[0], res[1])
 }
 
 function rob(root) {
-    let dp = new Map()
-    function fn(root) {
-      if (root == null) return [0, 0]
-      let left = fn(root.left),
-        right = fn(root.right)
-      // 不打劫根节点
-      res1 = Math.max(left[0], left[1]) + Math.max(right[0], right[1])
-      // 打劫根节点
-      res2 = root.val + left[0] + right[0]
-      return [res1, res2]
-    }
-    let res = fn(root)
-    return Math.max(res[0], res[1])
+  let dp = new Map()
+  function fn(root) {
+    if (root == null) return [0, 0]
+    let left = fn(root.left),
+      right = fn(root.right)
+    // 不打劫根节点
+    res1 = Math.max(left[0], left[1]) + Math.max(right[0], right[1])
+    // 打劫根节点
+    res2 = root.val + left[0] + right[0]
+    return [res1, res2]
   }
+  let res = fn(root)
+  return Math.max(res[0], res[1])
+}
