@@ -1,4 +1,4 @@
-function findKthList(head, k){
+function FindKthToTail(head, k){
     let fast = haed, slow = head
     while(k > 0){
         if(fast){
