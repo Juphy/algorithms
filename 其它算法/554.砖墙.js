@@ -25,17 +25,19 @@
 // 对于每一行 i ，sum(wall[i]) 是相同的
 // 1 <= wall[i][j] <= 231 - 1
 
+// 累计计算每行，从 0 到 length-2 找出这中间出现次数最多的值
+
 function leastBricks(wall){
-    let len = wall.length
-    let sum = wall[0].reduce((a, b) => a+b, 0)
-    let map = new Map()
+    let len = wall.length, map = new Map(), max = 0
     for(let i = 0; i < len; i++){
         let size = wall[i].length, w = 0
         for(let j = 0; j < size - 1; j++){
             w += wall[i][j]
             map.set(w, (map.get(w) || 0) + 1)
+            max = Math.max(max, map.get(w))
         }
     }
+    return len - max
 }
 wall = [
     [1, 2, 2, 1],
