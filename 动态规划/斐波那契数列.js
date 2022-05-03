@@ -15,7 +15,7 @@ let fib2 = (function () {
 })()
 
 console.log(Date.now())
-console.log(fib2(500))
+console.log(fib2(45))
 console.log(Date.now())
 
 function fib3(n) {
@@ -28,5 +28,5 @@ function fib3(n) {
     return prev
 }
 console.log(Date.now())
-console.log(fib3(500))
+console.log(fib3(45))
 console.log(Date.now())
