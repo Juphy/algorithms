@@ -25,4 +25,19 @@
 
 // 请你设计时间复杂度为 O(n) 的算法解决本问题
 
-function sortedSquares()
+function sortedSquares(nums){
+    let k = nums.length - 1
+    let i = 0, j = k
+    let arr = []
+    while(i < j){
+        let l = nums[i]*nums[i], r = nums[j]*nums[j]
+        if(l <= r){
+            arr[k--] = r
+            j--
+        }else{
+            arr[k--] = l
+            i++
+        }
+    }
+    return arr
+}
