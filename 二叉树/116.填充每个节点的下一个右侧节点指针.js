@@ -37,7 +37,7 @@
 // 使用递归解题也符合要求，本题中递归程序占用的栈空间不算做额外的空间复杂度
 
 function connect(root){
-    if(!root || !root.left) return
+    if(!root || !root.left) return root
     root.left.next = root.right
     if(root.next){
         root.right.next = root.next.left
