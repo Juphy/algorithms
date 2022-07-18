@@ -108,6 +108,32 @@ Trie.prototype.startsWith = function(prefix){
     return !!this.searchPrefix(prefix)
 }
 
+// trie = {
+//     children: {
+//         a: {
+//             p: {
+//                 p: {
+//                     l: {
+//                         e:{
+//                             isEnd: true
+//                         }
+//                     },
+//                     isEnd: true
+//                 }
+//             }
+//         },
+//         f: {
+//             o: {
+//                 o: {
+//                     d: {
+//                         isEnd: true
+//                     }
+//                 }
+//             }
+//         }
+//     }
+// }
+
 var trie = new Trie()
 trie.insert('apple')
 console.log(trie.children)
