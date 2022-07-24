@@ -51,23 +51,27 @@ MyCalendar.prototype.book = function (start, end) {
     this.calendars.push([start, end])
     return true
 }
-
-
-function TreeNode(left, right) {
-    this.left = left;
-    this.right = right;
-    this.lChild = null;
-    this.rChild = null;
+var MyCalendar = function () {
+    this.tree = new Map();
 }
 
-var MyCalendarTwo = function () {
-    this.root = null;
-}
-
-MyCalendarTwo.prototype.book = function (start, end) {
-    if (!this.root) {
-        this.root = new TreeNode(start, end);
-        return true
+MyCalendar.prototype.update = function (start, end, val, l, r, idx) {
+    if (r < start || end < l) return;
+    if (!this.tree.has(idx)) {
+        this.tree.set(idx, [0, 0])
     }
-    let cur = this.root;
+    if (start <= l && end >= r) {
+        this.tree.get(idx)[0] += val;
+        this.tree.get(idx)[1] += val;
+    } else {
+        let mid = (l + r) >> 1;
+        this.update(start, end, val, l, mid, 2 * idx);
+        this.update(start, end, val, mid + 1, r, 2 * idx + 1);
+    }
 }
+
+MyCalendar.prototype.book = function (start, end) {
+
+}
+
+
