@@ -58,3 +58,54 @@ let grid = [
     ["0", "0", "0", "1", "1"]
 ]
 console.log(numIslands(grid))
+var maxAreaOfIsland = function (grid) {
+    let max = 0, count = 0;
+    let m = grid.length, n = grid[0].length
+    for(let i = 0; i < m; i++){
+        for(let j = 0; j < n; j++){
+            if(grid[i][j] === 1){
+                count = 0;
+                dfs(i, j)
+            }
+        }
+    }
+    function dfs(x, y) {
+        let cur = grid[x] && grid[x][y]
+        if (cur === undefined || cur === 0) return;
+        grid[x][y] = 0;
+        count++;
+        max = Math.max(max, count);
+        dfs(x + 1, y)
+        dfs(x - 1, y)
+        dfs(x, y + 1)
+        dfs(x, y - 1)
+    }
+
+    return max
+}
+
+
+var maxAreaOfIsland = function(grid){
+    let max = 0,
+        m = grid.length, n = grid[0].length
+    for(let i = 0; i < m; i++){
+        for(let j = 0; j < n; j++){
+            if(grid[i][j]===1){
+                let queue = [[i, j]], count = 0
+                while(queue.length > 0){
+                    let [x, y] = queue.shift()
+                    let cur = grid[x] && grid[x][y]
+                    if(cur === undefined || cur === 0) continue
+                    count++
+                    grid[x][y] = 0
+                    queue.push([x+1, y])
+                    queue.push([x-1, y])
+                    queue.push([x, y+1])
+                    queue.push([x, y-1])
+                }
+                max = Math.max(max, count)
+            }
+        }
+    }
+    return max    
+}
